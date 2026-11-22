@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Better Than Ever</title>
+<meta name="description" content="Desapegos selecionados — peças originais, bem cuidadas, com pagamento em reais ou euros.">
+<meta property="og:title" content="Better Than Ever — desapegos">
+<meta property="og:description" content="Peças originais, bem cuidadas. Pague em R$ (até 12x) ou em €.">
+<meta property="og:image" content="fotos/capa.jpg">
+<meta name="theme-color" content="#f6f3ee">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f3ee; --card:#ffffff; --ink:#1c1a17; --muted:#6f6a62; --line:#e6e0d6;
+    --accent:#1c1a17; --accent-ink:#ffffff; --soft:#efe9df; --sold:#b4483a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141311; --card:#1d1b18; --ink:#f3efe8; --muted:#a59f95; --line:#2e2b26;
+      --accent:#f3efe8; --accent-ink:#141311; --soft:#26231f; --sold:#e07a6c;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,sans-serif;
+       padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+  .wrap{max-width:560px;margin:0 auto;padding:0 16px}
+  header{padding:40px 0 24px;text-align:center}
+  h1{font:600 2rem/1.1 Fraunces,Georgia,serif;letter-spacing:-.01em}
+  .tag{color:var(--muted);margin-top:8px;font-size:.95rem}
+  .pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+  .pill{font-size:.78rem;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+  .product{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:20px}
+  .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;background:var(--soft)}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery img,.gallery .ph{flex:0 0 100%;width:100%;aspect-ratio:1/1;object-fit:cover;scroll-snap-align:center}
+  .ph{display:grid;place-items:center;color:var(--muted);font-size:.85rem}
+  .dots{display:flex;gap:6px;justify-content:center;padding:10px 0 0}
+  .dots span{width:6px;height:6px;border-radius:50%;background:var(--line)}
+  .dots span.on{background:var(--ink)}
+  .body{padding:16px 18px 20px}
+  .brand{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  h2{font:600 1.35rem/1.25 Fraunces,Georgia,serif;margin:2px 0 8px}
+  .price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .brl{font-size:1.4rem;font-weight:600}
+  .eur{color:var(--muted)}
+  .inst{font-size:.85rem;color:var(--muted);margin-top:2px}
+  .orig{font-size:.8rem;color:var(--muted);text-decoration:line-through}
+  .desc{margin-top:12px;font-size:.95rem}
+  dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:12px;font-size:.88rem}
+  dt{color:var(--muted)}
+  .btns{display:grid;gap:10px;margin-top:18px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:14px;
+       font-weight:600;text-decoration:none;font-size:.98rem;border:1px solid var(--ink)}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .btn.ghost{color:var(--ink);background:transparent}
+  .btn.small{min-height:42px;font-weight:500;font-size:.9rem;border-color:var(--line);color:var(--ink)}
+  .status{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 8px;border-radius:6px;margin-left:6px;vertical-align:middle}
+  .status.reserved{background:var(--soft);color:var(--muted)}
+  .status.sold{background:var(--sold);color:#fff}
+  .product.is-sold .btns{display:none}
+  .product.is-sold .gallery{filter:grayscale(.8);opacity:.7}
+
+  .info{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:8px 0 20px;font-size:.9rem}
+  .info h3{font:600 1.05rem Fraunces,Georgia,serif;margin-bottom:8px}
+  .info ul{padding-left:18px;display:grid;gap:4px;color:var(--muted)}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:8px 0 40px}
+  footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Better Than Ever</h1>
+    <p class="tag">Desapegos selecionados. Peças originais, bem cuidadas, prontas para uma nova casa.</p>
+    <div class="pills">
+      <span class="pill">100% originais</span>
+      <span class="pill">R$ até 12x · Pix</span>
+      <span class="pill">€ cartão / SEPA</span>
+    </div>
+  </header>
+
+  <main id="list"></main>
+
+  <section class="info">
+    <h3>Como funciona</h3>
+    <ul>
+      <li>Toque em “Pagar” e finalize no checkout seguro (Pix ou cartão em até 12x em reais; cartão ou transferência em euros).</li>
+      <li>Prefere conversar antes? Me chama no Instagram — mando mais fotos e vídeo.</li>
+      <li>Envio com rastreio e seguro, ou entrega em mãos combinada.</li>
+      <li>Nota fiscal / caixa / certificado quando indicado no anúncio.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><a id="ig-footer" href="#">@seuinstagram</a> · betterthanever.club</p>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   EDITE AQUI — tudo que muda no site está neste bloco.
+   - fotos: coloque os arquivos na pasta /fotos e escreva o nome.
+   - linkBRL: link de pagamento (InfinitePay / Mercado Pago).
+   - linkEUR: link de pagamento em euro (Stripe / Revolut / Wise).
+   - status: "disponivel" | "reservado" | "vendido"
+   ============================================================ */
+const CONTATO = {
+  instagram: "seuinstagram",          // sem @
+  whatsapp:  ""                       // ex: "5511999999999" (opcional)
+};
+
+const PRODUTOS = [
+  {
+    marca: "Saint Laurent",
+    nome: "Bolsa Loulou Medium — couro matelassê preto",
+    precoBRL: 9800, precoEUR: 1550, precoOriginalEUR: 2690,
+    parcelas: 12,
+    descricao: "Usada poucas vezes, guardada no dust bag. Sem marcas no couro, ferragens douradas sem riscos.",
+    detalhes: { Estado: "Excelente", Acompanha: "Dust bag, caixa e nota", Medidas: "32 × 22 × 11 cm" },
+    fotos: [],
+    linkBRL: "", linkEUR: "",
+    status: "disponivel"
+  },
+  {
+    marca: "Saint Laurent",
+    nome: "Bolsa Kate — couro liso preto",
+    precoBRL: 7200, precoEUR: 1150, precoOriginalEUR: 2290,
+    parcelas: 12,
+    descricao: "Clássica, alça corrente. Pequenos sinais de uso nos cantos (fotos detalhadas no carrossel).",
+    detalhes: { Estado: "Muito bom", Acompanha: "Dust bag", Medidas: "24 × 14,5 × 5 cm" },
+    fotos: [],
+    linkBRL: "", linkEUR: "",
+    status: "disponivel"
+  },
+  {
+    marca: "Apple",
+    nome: "Apple Watch — modelo / tamanho",
+    precoBRL: 3200, precoEUR: 480, precoOriginalEUR: null,
+    parcelas: 12,
+    descricao: "Bateria em X%, sem riscos na tela. Desvinculado do iCloud e restaurado de fábrica.",
+    detalhes: { Estado: "Excelente", Acompanha: "Caixa, carregador e pulseira", Garantia: "Até mm/aaaa" },
+    fotos: [],
+    linkBRL: "", linkEUR: "",
+    status: "disponivel"
+  }
+];
+/* ============================ fim ============================ */
+
+const brl = n => n.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+const eur = n => n.toLocaleString("pt-BR",{style:"currency",currency:"EUR",maximumFractionDigits:0});
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const igURL = `https://ig.me/m/${CONTATO.instagram}`;
+
+function contatoURL(p){
+  if (CONTATO.whatsapp){
+    const msg = encodeURIComponent(`Oi! Tenho interesse em: ${p.marca} ${p.nome}`);
+    return `https://wa.me/${CONTATO.whatsapp}?text=${msg}`;
+  }
+  return igURL;
+}
+
+function card(p, i){
+  const st = p.status === "vendido" ? '<span class="status sold">Vendido</span>'
+           : p.status === "reservado" ? '<span class="status reserved">Reservado</span>' : "";
+  const fotos = p.fotos.length
+    ? p.fotos.map((f,k)=>`<img src="fotos/${esc(f)}" alt="${esc(p.nome)} — foto ${k+1}" loading="${i||k?"lazy":"eager"}">`).join("")
+    : `<div class="ph">Foto em breve</div>`;
+  const dots = p.fotos.length > 1 ? `<div class="dots">${p.fotos.map((_,k)=>`<span class="${k?"":"on"}"></span>`).join("")}</div>` : "";
+  const det = Object.entries(p.detalhes||{}).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+  const btnBRL = p.linkBRL ? `<a class="btn primary" href="${esc(p.linkBRL)}" target="_blank" rel="noopener">Pagar em R$ · Pix ou até ${p.parcelas}x</a>` : "";
+  const btnEUR = p.linkEUR ? `<a class="btn ghost" href="${esc(p.linkEUR)}" target="_blank" rel="noopener">Pay in € · ${eur(p.precoEUR)}</a>` : "";
+  const reservado = p.status === "reservado";
+  return `
+  <article class="product ${p.status==="vendido"?"is-sold":""}">
+    <div class="gallery">${fotos}</div>${dots}
+    <div class="body">
+      <div class="brand">${esc(p.marca)}${st}</div>
+      <h2>${esc(p.nome)}</h2>
+      <div class="price">
+        <span class="brl">${brl(p.precoBRL)}</span>
+        <span class="eur">ou ${eur(p.precoEUR)}</span>
+        ${p.precoOriginalEUR ? `<span class="orig">loja ${eur(p.precoOriginalEUR)}</span>`:""}
+      </div>
+      <div class="inst">ou ${p.parcelas}x de ${brl(Math.ceil(p.precoBRL/p.parcelas))}*</div>
+      <p class="desc">${esc(p.descricao)}</p>
+      <dl>${det}</dl>
+      <div class="btns">
+        ${reservado ? "" : btnBRL + btnEUR}
+        <a class="btn small" href="${contatoURL(p)}" target="_blank" rel="noopener">${reservado ? "Reservado — entrar na fila" : "Tirar dúvidas / pedir mais fotos"}</a>
+      </div>
+    </div>
+  </article>`;
+}
+
+const list = document.getElementById("list");
+list.innerHTML = PRODUTOS.map(card).join("") +
+  `<p style="font-size:.75rem;color:var(--muted);margin:-8px 0 16px">*Parcelamento no cartão brasileiro; juros do parcelamento podem ser acrescidos no checkout.</p>`;
+
+const igf = document.getElementById("ig-footer");
+igf.href = `https://instagram.com/${CONTATO.instagram}`;
+igf.textContent = "@" + CONTATO.instagram;
+
+/* indicador do carrossel */
+document.querySelectorAll(".gallery").forEach(g=>{
+  const dots = g.nextElementSibling?.classList.contains("dots") ? g.nextElementSibling.children : null;
+  if(!dots) return;
+  g.addEventListener("scroll",()=>{
+    const i = Math.round(g.scrollLeft / g.clientWidth);
+    [...dots].forEach((d,k)=>d.classList.toggle("on",k===i));
+  },{passive:true});
+});
+</script>
+</body>
+</html>
