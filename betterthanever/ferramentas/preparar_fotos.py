@@ -20,7 +20,7 @@ try:
 except ImportError:
     pass
 
-LADO, FUNDO = 1200, (253, 246, 250)  # --bg do site
+LADO, FUNDO = 1200, (251, 246, 247)  # --bg do site (Ever)
 EXTS = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"}
 
 def main():
