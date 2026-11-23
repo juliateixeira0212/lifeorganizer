@@ -52,7 +52,7 @@ um exemplo). Campos:
 - `detalhes`: 3–4 pares, ex. `Estado`, `Acompanha`, `Medidas`, `Garantia`, `Bateria`.
   Escala de estado: Novo com etiqueta · Excelente · Muito bom · Bom.
 - `fotos`: a lista que o script imprimiu.
-- `precoBRL`, `precoEUR`, `precoOriginalEUR` (ou `null`), `parcelas: 12`
+- `precoBRL`, `precoEUR`, `precoOriginalEUR` (ou `null`), `parcelas: 0` (ainda não há parcelamento; só pôr 12 quando ela tiver)
 - `linkBRL`/`linkEUR`: manter vazios se não houver; nunca inventar link.
 - `status: "disponivel"`
 
@@ -62,8 +62,8 @@ Entregue no chat, pronta para copiar:
 ✨ desapego: <marca> <modelo>
 <1 frase sobre a peça>
 Estado: <...> · Acompanha: <...>
-R$ <preço> (Pix ou até 12x) · € <preço>
-🔗 link na bio → betterthanever.club
+R$ <preço> (Pix) · € <preço>
+🔗 link na bio → shop.betterthanever.club
 ```
 Mais uma variação curta para stories (≤ 2 linhas).
 

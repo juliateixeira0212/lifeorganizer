@@ -6,7 +6,7 @@
 <title>Better Than Ever</title>
 <meta name="description" content="Desapegos selecionados — peças originais, bem cuidadas, com pagamento em reais ou euros.">
 <meta property="og:title" content="Better Than Ever — desapegos">
-<meta property="og:description" content="Peças originais, bem cuidadas. Pague em R$ (até 12x) ou em €.">
+<meta property="og:description" content="Peças originais, bem cuidadas. Pague em R$ (Pix) ou em €.">
 <meta property="og:image" content="fotos/capa.jpg">
 <meta name="theme-color" content="#fbf6f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#140b10" media="(prefers-color-scheme: dark)">
@@ -84,7 +84,7 @@
     <p class="tag">Desapegos selecionados. Peças originais, bem cuidadas, prontas para uma nova casa.</p>
     <div class="pills">
       <span class="pill">100% originais</span>
-      <span class="pill">R$ até 12x · Pix</span>
+      <span class="pill">R$ · Pix</span>
       <span class="pill">€ cartão / SEPA</span>
     </div>
   </header>
@@ -94,7 +94,7 @@
   <section class="info">
     <h3>Como funciona</h3>
     <ul>
-      <li>Toque em “Pagar” e finalize no checkout seguro (Pix ou cartão em até 12x em reais; cartão ou transferência em euros).</li>
+      <li>Toque em “Pagar” e finalize no checkout seguro (Pix em reais; cartão ou transferência em euros).</li>
       <li>Prefere conversar antes? Me chama no Instagram — mando mais fotos e vídeo.</li>
       <li>Envio com rastreio e seguro, ou entrega em mãos combinada.</li>
       <li>Nota fiscal / caixa / certificado quando indicado no anúncio.</li>
@@ -124,7 +124,7 @@ const PRODUTOS = [
     marca: "Saint Laurent",
     nome: "Bolsa Loulou Small · couro preto",
     precoBRL: 12900, precoEUR: 1990, precoOriginalEUR: null,
-    parcelas: 12,
+    parcelas: 0,          // 0 = sem parcelamento; 12 = mostra "até 12x"
     descricao: "A Loulou em couro preto com o matelassê em Y e o monograma YSL prateado. Usa no ombro com a corrente dupla ou na mão pela alça de couro. O couro está macio e sem marcas aparentes, só com as dobrinhas naturais nas laterais (fotos 8 e 9), e o forro e o bolso com zíper estão bons.",
     detalhes: { Estado: "Muito bom", Acompanha: "Dust bag", Ferragens: "Prateadas", Medidas: "23 × 17 × 9 cm (medidas do modelo)" },
     fotos: ["ysl-loulou-preta-1.jpg", "ysl-loulou-preta-2.jpg", "ysl-loulou-preta-3.jpg", "ysl-loulou-preta-4.jpg", "ysl-loulou-preta-5.jpg", "ysl-loulou-preta-6.jpg", "ysl-loulou-preta-7.jpg", "ysl-loulou-preta-8.jpg", "ysl-loulou-preta-9.jpg"],
@@ -135,7 +135,7 @@ const PRODUTOS = [
     marca: "Saint Laurent",
     nome: "Cassandre Envelope Chain Wallet · couro preto",
     precoBRL: 4900, precoEUR: 800, precoOriginalEUR: null,
-    parcelas: 12,
+    parcelas: 0,          // 0 = sem parcelamento; 12 = mostra "até 12x"
     descricao: "A carteira envelope com corrente da Saint Laurent, em couro grain de poudre preto (granulado, resistente a riscos), matelassê em chevron e monograma YSL prateado. Usa transversal, com a corrente e o apoio de couro no ombro. Bem conservada: cantos, costuras e interior sem marcas aparentes.",
     detalhes: { Estado: "Excelente", Acompanha: "Caixa, dust bag e livretos", Ferragens: "Prateadas", Alça: "Corrente com apoio de couro" },
     fotos: ["ysl-cassandre-envelope-1.jpg", "ysl-cassandre-envelope-2.jpg", "ysl-cassandre-envelope-3.jpg", "ysl-cassandre-envelope-4.jpg", "ysl-cassandre-envelope-5.jpg", "ysl-cassandre-envelope-6.jpg", "ysl-cassandre-envelope-7.jpg", "ysl-cassandre-envelope-8.jpg", "ysl-cassandre-envelope-9.jpg"],
@@ -146,7 +146,7 @@ const PRODUTOS = [
     marca: "Apple",
     nome: "Apple Watch SE (2ª geração) 40 mm GPS · Meia-noite",
     precoBRL: 890, precoEUR: 120, precoOriginalEUR: null,
-    parcelas: 12,
+    parcelas: 0,          // 0 = sem parcelamento; 12 = mostra "até 12x"
     descricao: "Apple Watch SE de 2ª geração, 40 mm, caixa de alumínio meia-noite com pulseira esportiva da mesma cor. Funciona normalmente, mas o vidro tem riscos (sem trinca) e marcas visíveis na borda inferior esquerda (ver foto 6), e a caixa tem pequenos sinais de uso nas bordas. A pulseira está inteira, sem rasgos. Vai com nota e carregador, desvinculado do iCloud na entrega.",
     detalhes: { Estado: "Bom (riscos no vidro, foto 6)", Acompanha: "Carregador, nota e pulseira esportiva", Modelo: "SE 2ª geração · 40 mm · GPS" },
     fotos: ["apple-watch-se-40-midnight-1.jpg", "apple-watch-se-40-midnight-2.jpg", "apple-watch-se-40-midnight-3.jpg", "apple-watch-se-40-midnight-4.jpg", "apple-watch-se-40-midnight-5.jpg", "apple-watch-se-40-midnight-6.jpg"],
@@ -177,7 +177,7 @@ function card(p, i){
     : `<div class="ph">Foto em breve</div>`;
   const dots = p.fotos.length > 1 ? `<div class="dots">${p.fotos.map((_,k)=>`<span class="${k?"":"on"}"></span>`).join("")}</div>` : "";
   const det = Object.entries(p.detalhes||{}).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
-  const btnBRL = p.linkBRL ? `<a class="btn primary" href="${esc(p.linkBRL)}" target="_blank" rel="noopener">Pagar em R$ · Pix ou até ${p.parcelas}x</a>` : "";
+  const btnBRL = p.linkBRL ? `<a class="btn primary" href="${esc(p.linkBRL)}" target="_blank" rel="noopener">Pagar em R$ · Pix${p.parcelas>1 ? ` ou até ${p.parcelas}x` : ""}</a>` : "";
   const btnEUR = p.linkEUR ? `<a class="btn ghost" href="${esc(p.linkEUR)}" target="_blank" rel="noopener">Pay in € · ${eur(p.precoEUR)}</a>` : "";
   const reservado = p.status === "reservado";
   return `
@@ -191,7 +191,7 @@ function card(p, i){
         <span class="eur">ou ${eur(p.precoEUR)}</span>
         ${p.precoOriginalEUR ? `<span class="orig">loja ${eur(p.precoOriginalEUR)}</span>`:""}
       </div>
-      <div class="inst">ou ${p.parcelas}x de ${brl(Math.ceil(p.precoBRL/p.parcelas))}*</div>
+      ${p.parcelas>1 ? `<div class="inst">ou ${p.parcelas}x de ${brl(Math.ceil(p.precoBRL/p.parcelas))}*</div>` : ""}
       <p class="desc">${esc(p.descricao)}</p>
       <dl>${det}</dl>
       <div class="btns">
@@ -203,8 +203,8 @@ function card(p, i){
 }
 
 const list = document.getElementById("list");
-list.innerHTML = PRODUTOS.map(card).join("") +
-  `<p style="font-size:.75rem;color:var(--muted);margin:-8px 0 16px">*Parcelamento no cartão brasileiro; juros do parcelamento podem ser acrescidos no checkout.</p>`;
+list.innerHTML = PRODUTOS.map(card).join("") + (PRODUTOS.some(p=>p.parcelas>1) ?
+  `<p style="font-size:.75rem;color:var(--muted);margin:-8px 0 16px">*Parcelamento no cartão brasileiro; juros do parcelamento podem ser acrescidos no checkout.</p>` : "");
 
 const igf = document.getElementById("ig-footer");
 igf.href = `https://instagram.com/${CONTATO.instagram}`;
